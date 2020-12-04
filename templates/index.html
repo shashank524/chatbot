@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="search-container">
+            
+        </div>
+        <div id="conversation-list">
+            
+        </div>
+        <div id="new-message-container">
+            <div class="theme-container">
+                <div><p>Theme: </p></div>
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked onclick="change_theme()">
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>  
+            </div>
+                  
+        
+        </div>
+        <div id="chat-title">
+            <span>Bob</span>
+            <div class="circle2">
+                <i class="fa fa-refresh fa-2x fa-spin-hover" onClick="window.location.reload();" id="refresh-button"></i>
+            </div>
+            
+        </div>
+        <div id="chat-message-list">
+
+            <div class="message-row bot-message">
+                <div class="message-text">Hi, I am a bob</div>
+            </div>
+            
+        </div>
+        <div id="chat-form">
+            
+            <input type="text" placeholder="Type a message..." id="textInput">
+            <div class="circle">
+                <i class="far fa-paper-plane" id="buttonInput"></i>
+            </div>  
+            
+        </div>
+
+    </div>
+
+    <script>
+        function getBotResponse(){
+            let rawText = $('#textInput').val();
+            
+            let userHtml = "<div class='message-row user-message'><div class='message-text'>" + rawText + "</div></div>"
+
+            if(rawText!=""){
+                $('#textInput').val("");
+
+                document.querySelector("#chat-message-list").innerHTML += userHtml;
+
+                $("#chat-message-list").stop().animate({ scrollTop: $("#chat-message-list")[0].scrollHeight}, 1000);
+
+                $.get('/get', { msg: rawText }).done(function(data){
+                    let botHtml = "<div class='message-row bot-message'><div class='message-text'>" + data + "</div></div>"
+
+                    document.querySelector("#chat-message-list").innerHTML += botHtml;
+                    $("#chat-message-list").stop().animate({ scrollTop: $("#chat-message-list")[0].scrollHeight}, 1000);
+                });
+            }
+            }
+            
+
+        $('#textInput').keypress(function(e){
+            if(e.which == 13){
+                getBotResponse();
+            }
+        });
+        $('#buttonInput').click(function(){
+            getBotResponse();
+        });
+
+        function change_theme(){
+            if (document.querySelector("#myonoffswitch").checked === false){
+                dark_theme();
+            }
+            else{
+                light_theme();
+            }
+        }
+        function dark_theme(){
+            document.querySelector("#chat-message-list").style.background="#121212";
+            document.querySelector("#chat-title").style.background="#2f2f2f";
+            document.querySelector('#chat-title').style.color="#61A4FF";
+            document.querySelector("#chat-form").style.background="#2f2f2f";
+        }
+
+        function light_theme(){
+            document.querySelector("#chat-message-list").style.background="#fff";
+            document.querySelector("#chat-title").style.background="#eee";
+            document.querySelector('#chat-title').style.color="#0048AA";
+            document.querySelector("#chat-form").style.background="#eee";
+        }
+    </script> 
+
+    
+</body>
+</html>
+
+
+
