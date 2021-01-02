@@ -2,6 +2,5 @@ chatterbot
 flask
 gunicorn
 wikipedia
-subprocess
 spacy
 
