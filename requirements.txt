@@ -2,3 +2,4 @@ chatterbot
 flask
 gunicorn
 wikipedia
+spacy==2.1.9

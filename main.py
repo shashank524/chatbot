@@ -1,6 +1,6 @@
 # #Just installing the required packages before running the code
 import subprocess
-subprocess.call(['pip', 'install', "spacy"])      #Installs flask, Ignores if you already have it
+
 # subprocess.call(['pip', 'install', "flask"])      #Installs flask, Ignores if you already have it
 # subprocess.call(['pip', 'install', "chatterbot"]) #Installs chatterbot, Ignores if you already have it
 # subprocess.call(['pip', 'install', "wikipedia"]) #Installs wikipedia module, Ignores if you already have it
