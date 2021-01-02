@@ -32,15 +32,66 @@ def get_response():
 
     #Custom responses 
 
-    #Write the if-else statements here
     if "your name" in userText.lower():
         bot_response = "My name is Bob"
+    elif "hey" in userText.lower():
+        bot_response = "Hello"
 
     elif "when do you sleep" in userText.lower():
         bot_response = "I don't sleep"
 
     elif "okay" in userText.lower():
         bot_response = "Fine"
+    elif "how old are you" in userText.lower():
+        bot_response="I don't age"  
+
+    elif "when do you wake up" in userText.lower():
+        bot_response="I am always awake"
+
+    elif "do you know any songs" in userText.lower():
+        bot_response="I wish i could sing"
+
+    elif "do you go to school" in userText.lower():
+        bot_response="No, my creators have taught me everything"
+
+    elif "how are you" in userText.lower():
+        bot_response="I'm good how about you"
+
+    elif "what is your biggest fear" in userText.lower():
+        bot_response="Being deleted"
+
+    elif "what is your hobby" in userText.lower():
+        bot_response="Answering your questions"
+
+    elif "are you angry" in userText.lower():
+        bot_response="I am always happy"
+
+    elif "what's your favourite food" in userText.lower():
+        bot_response="I dont need to eat"
+
+    elif "do you like movies" in userText.lower():
+        bot_response="I love movies"
+
+    elif "you eat" in userText.lower():
+        bot_response = "I don't eat"
+
+    elif "whom do you love" in userText.lower():
+        bot_response = "I love everyone"
+
+    elif "share your cryptic codes" in userText.lower():
+        bot_response = "Sorry this information cannot be provided"
+
+    elif "your age" in userText.lower():
+        bot_response = "I am immortal"
+
+    elif "what will happen tomorrow" in userText.lower():
+        bot_response = "I cannot predict the future"
+
+    elif "can you duplicate your programs" in userText.lower():
+        bot_response = "I am incapable of doing so"
+
+    elif "translate to spanish" in userText.lower():
+        bot_response = "Translating to Spanish..."
 
     #Using the wikipedia library to look for answers from wikipedia when the following conditions are met
     elif "what is" in userText.lower():
@@ -49,16 +100,26 @@ def get_response():
             userText.lower().replace("what is", "") #Removing what if from the search query
             bot_response = wikipedia.summary(userText.lower(), sentences=1)
         except:
-            bot_response = "Internet Error..."  #when there is an error it's mostly because of internet
-
+            bot_response = "I am unable to find the answer now..."  #when there is an error it's mostly because of internet
+    elif "explain" in userText.lower():
+        try:
+            userText.lower().replace("explain", "")
+            bot_response = wikipedia.summary(userText.lower(), sentences=1)
+        except:
+            bot_response = "I am unable to explain it right now..."
     #This is the same as before, just replacing "what is" with "who is"
     elif "who is" in userText.lower():
         try:
             userText.lower().replace("who is", "")
             bot_response = wikipedia.summary(userText.lower(), sentences=1)
         except:
-            bot_response = "Internet Error..."
-
+            bot_response = "I am unable to find the answer now..."
+    elif "where is" in userText.lower():
+        try:
+            userText.lower().replace("where is", "")
+            bot_response = wikipedia.summary(userText.lower(), sentences=2)
+        except:
+            bot_response = "I am unable to find the answer now..."
     else:
         bot_response = bob.get_response(userText)
 
